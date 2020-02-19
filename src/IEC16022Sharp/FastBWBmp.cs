@@ -81,10 +81,10 @@ namespace IEC16022Sharp
             int cols = _dots.GetLength(1);
 
             // intero superiore
-            int bytesPerRow = cols / 8 + ( cols % 8 == 0 ? 0 : 1 );
+            int bytesPerRow = (cols / 8) + ( cols % 8 == 0 ? 0 : 1 );
             // arrotonda sempre a multipli di 4 bytes
             if (bytesPerRow % 4 > 0)
-                bytesPerRow += 4 - bytesPerRow % 4;
+                bytesPerRow += 4 - (bytesPerRow % 4);
 
             // Alloca spazio per i pixel
             byte[] bytes = new byte[bytesPerRow * rows];
@@ -128,9 +128,9 @@ namespace IEC16022Sharp
         {
             var fileHeader = new BitmapFileHeader
             {
-                bfOffBits = 14 + 40 + ( 2 * 4 )   // BITMAPFILEHEADER + BITMAPINFOHEADER + 2 * RGBQUAD
+                BfOffBits = 14 + 40 + ( 2 * 4 )   // BITMAPFILEHEADER + BITMAPINFOHEADER + 2 * RGBQUAD
             };
-            fileHeader.bfSize = fileHeader.bfOffBits + (uint)_pixelData.Length; // dataLength + headersLength
+            fileHeader.BfSize = fileHeader.BfOffBits + (uint)_pixelData.Length; // dataLength + headersLength
             var fileHeaderBytes = fileHeader.ToByteArray();
 
             var infoHeader = new BitmapInfoHeader
@@ -182,31 +182,31 @@ namespace IEC16022Sharp
 
         private class BitmapFileHeader
         {
-            private ushort bfType = 19778;   // "BM"
-            private ushort bfReserved1 = 0;  // must always be set to zero.
-            private ushort bfReserved2 = 0;  // must always be set to zero.
+            private readonly ushort _bfType = 19778;   // "BM"
+            private readonly ushort _bfReserved1 = 0;  // must always be set to zero.
+            private readonly ushort _bfReserved2 = 0;  // must always be set to zero.
 
-            public uint bfSize;            // specifies the size of the file in bytes.
-            public uint bfOffBits;         // specifies the offset from the beginning of the file to the bitmap data.
+            public uint BfSize;            // specifies the size of the file in bytes.
+            public uint BfOffBits;         // specifies the offset from the beginning of the file to the bitmap data.
 
             public byte[] ToByteArray()
             {
                 byte[] b = new byte[14];
-                _intTo2Bytes(bfType).CopyTo(b, 0);
-                _intTo4Bytes(bfSize).CopyTo(b, 2);
-                _intTo2Bytes(bfReserved1).CopyTo(b, 2 + 4);
-                _intTo2Bytes(bfReserved2).CopyTo(b, 2 + 4 + 2);
-                _intTo4Bytes(bfOffBits).CopyTo(b, 2 + 4 + 2 + 2);
+                _intTo2Bytes(_bfType).CopyTo(b, 0);
+                _intTo4Bytes(BfSize).CopyTo(b, 2);
+                _intTo2Bytes(_bfReserved1).CopyTo(b, 2 + 4);
+                _intTo2Bytes(_bfReserved2).CopyTo(b, 2 + 4 + 2);
+                _intTo4Bytes(BfOffBits).CopyTo(b, 2 + 4 + 2 + 2);
                 return b;
             }
         }
 
         private class BitmapInfoHeader
         {
-            private ushort Planes = 1;	    // specifies the number of planes of the target device, must be set to zero.
-            private uint Compression = 0;   // Specifies the type of compression, usually set to zero (no compression).
-            private uint ClrUsed = 0;       // specifies the number of colors used in the bitmap, if set to zero the number of colors is calculated using the biBitCount member.
-            private uint ClrImportant = 0;  // specifies the number of color that are 'important' for the bitmap, if set to zero, all colors are important.
+            private readonly uint _compression = 0;   // Specifies the type of compression, usually set to zero (no compression).
+            private readonly uint _clrUsed = 0;       // specifies the number of colors used in the bitmap, if set to zero the number of colors is calculated using the biBitCount member.
+            private readonly uint _clrImportant = 0;  // specifies the number of color that are 'important' for the bitmap, if set to zero, all colors are important.
+            private readonly ushort _planes = 1;	  // specifies the number of planes of the target device, must be set to zero.
 
             public uint Size = 40;          // specifies the size of the BITMAPINFOHEADER structure, in bytes.
             public uint Width = 0;	        // specifies the width of the image, in pixels.
@@ -222,14 +222,14 @@ namespace IEC16022Sharp
                 _intTo4Bytes(Size).CopyTo(b, 0);
                 _intTo4Bytes(Width).CopyTo(b, 0 + 4);
                 _intTo4Bytes(Height).CopyTo(b, 4 + 4);
-                _intTo2Bytes(Planes).CopyTo(b, 8 + 4);
+                _intTo2Bytes(_planes).CopyTo(b, 8 + 4);
                 _intTo2Bytes(BitCount).CopyTo(b, 12 + 2);
-                _intTo4Bytes(Compression).CopyTo(b, 14 + 2);
+                _intTo4Bytes(_compression).CopyTo(b, 14 + 2);
                 _intTo4Bytes(SizeImage).CopyTo(b, 16 + 4);
                 _intTo4Bytes(XPelsPerMeter).CopyTo(b, 20 + 4);
                 _intTo4Bytes(YPelsPerMeter).CopyTo(b, 24 + 4);
-                _intTo4Bytes(ClrUsed).CopyTo(b, 28 + 4);
-                _intTo4Bytes(ClrImportant).CopyTo(b, 32 + 4);
+                _intTo4Bytes(_clrUsed).CopyTo(b, 28 + 4);
+                _intTo4Bytes(_clrImportant).CopyTo(b, 32 + 4);
                 return b;
             }
         }
