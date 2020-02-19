@@ -1,4 +1,4 @@
-/** 
+/*
  *
  * (IEC16022Sharp DataMatrix bar code generation lib)
  * 
@@ -239,7 +239,7 @@ namespace IEC16022Sharp
             public byte Blue = 0;       // specifies the blue part of the color.
             public byte Green = 0;	   // specifies the green part of the color.
             public byte Red = 0;        // specifies the red part of the color.
-            private byte _reserved = 0;  // must always be set to zero.
+            private readonly byte _reserved = 0;  // must always be set to zero.
 
             public RgbQuad(byte red, byte green, byte blue)
             {

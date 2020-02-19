@@ -1,4 +1,4 @@
-/** 
+/*
  *
  * IEC16022Sharp DataMatrix bar code generation lib
  * (c) 2007 Fabrizio Accatino <fhtino@yahoo.com>
