@@ -217,7 +217,7 @@ namespace IEC16022Sharp
                        ref eccp);
 
             if (array == null)
-                throw new DataMatrixException("Error building datamtrix: " + iec16022.ErrorMessage);
+                throw new DataMatrixException("Error building datamatrix: " + iec16022.ErrorMessage);
 
             _byteArray = new byte[_width, _height];
             for (int x = 0; x < _width; x++)
