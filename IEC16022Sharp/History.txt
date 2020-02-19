@@ -1,0 +1,9 @@
+
+0.3.1.0 : 2007-01-13 : Internal build
+0.3.4.0 : 2007-01-14 : First public build
+0.3.5.0 : 2007-01-19 : Added class FastBWBmp for fast 1 bit/pixel BMP file
+------- : 2008-10-09 : Added to SourceForge Subversion Server
+0.3.6.0 : 2008-10-10 : Added HexPbm output  (by Andrew Francis)
+                       Minor corrections.
+
+
