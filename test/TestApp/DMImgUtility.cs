@@ -5,7 +5,8 @@
  * 
  *   Core components are based on IEC16022 by Adrian Kennard, Andrews & Arnold Ltd
  *   (C version currently maintained by Stefan Schmidt)
- *
+ * (c) 2020 Gerard Gunnewijk <gerard.gunnewijk@live.nl>
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -24,7 +25,7 @@
 
 using System.Drawing;
 
-namespace IEC16022Sharp
+namespace TestApp
 {
     public static class DMImgUtility
     {

@@ -39,11 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DMImgUtility.cs" />
     <Compile Include="KnownIssue.cs" />
     <Compile Include="MultiThreadTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test_ReedSol.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\IEC16022Sharp\IEC16022Sharp.csproj">

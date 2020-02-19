@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using IEC16022Sharp;
 using System.Drawing.Imaging;
-
 
 namespace TestApp
 {
@@ -13,7 +9,7 @@ namespace TestApp
         {
             string message = "Sabry, Ely e bimbobimba.";
 
-            DataMatrix[] dm = new DataMatrix[]{
+            var dm = new DataMatrix[]{
                 new DataMatrix(message),          // NO: the result contains only "Sabry, Ely e bimbobimba"  (last dot was losted!)
                 new DataMatrix(message, 20, 20),  // OK
                 new DataMatrix(message, EncodingType.Ascii)  // OK
