@@ -16,8 +16,13 @@
     <PackageTags>IEC16022 Datamatrix 2d-barcode</PackageTags>
     <Product>IEC16022</Product>
     <Title>IEC16022</Title>
-    <Description>IEC16022</Description>
+    <Description>DataMatrix bar code generation library, forked from https://sourceforge.net/projects/iec16022sharp/</Description>
     <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIcon>Logo.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Images\Logo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>

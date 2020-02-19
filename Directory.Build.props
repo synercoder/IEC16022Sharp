@@ -21,15 +21,14 @@
 
   <!-- Default settings that explicitly differ from the Sdk.targets defaults-->
   <PropertyGroup>
-    <Company>Synercoding</Company>
-    <Authors>Synercoding</Authors>
+    <Authors>Gerard Gunnewijk,Fabrizio Accatino</Authors>
     <BaseOutputPath>$(BaseArtifactsPath)bin/$(BaseArtifactsPathSuffix)/</BaseOutputPath>
     <PackageOutputPath>$(BaseArtifactsPath)pkg/$(BaseArtifactsPathSuffix)/$(Configuration)/</PackageOutputPath>
   </PropertyGroup>
 
   <!-- Default settings that are otherwise undefined -->
   <PropertyGroup>
-    <Copyright>Copyright © $(Company) $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
+    <Copyright>Copyright © $(Product) $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
     <NeutralLanguage>en</NeutralLanguage>
     <OverwriteReadOnlyFiles>true</OverwriteReadOnlyFiles>
     <RepositoryType>git</RepositoryType>
