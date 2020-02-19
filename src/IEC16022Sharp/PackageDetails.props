@@ -19,6 +19,7 @@
     <Description>DataMatrix bar code generation library, forked from https://sourceforge.net/projects/iec16022sharp/</Description>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageIcon>Logo.png</PackageIcon>
+    <Copyright>Copyright © $(Product) $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

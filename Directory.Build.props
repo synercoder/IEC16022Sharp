@@ -28,7 +28,6 @@
 
   <!-- Default settings that are otherwise undefined -->
   <PropertyGroup>
-    <Copyright>Copyright © $(Product) $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
     <NeutralLanguage>en</NeutralLanguage>
     <OverwriteReadOnlyFiles>true</OverwriteReadOnlyFiles>
     <RepositoryType>git</RepositoryType>
