@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-
 namespace IEC16022Sharp
 {
-    internal struct ecc200matrix_s
+    internal struct Ecc200matrix_s
     {
-        public ecc200matrix_s(int h, int w, int fh, int fw, int bytes, int datablock, int rsblock)
+        public Ecc200matrix_s(int h, int w, int fh, int fw, int bytes, int datablock, int rsblock)
         {
             H = h;
             W = w;

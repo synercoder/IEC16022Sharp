@@ -16,9 +16,9 @@ namespace TestApp
             
             // ReedSol calculation
             IEC16022Sharp.ReedSol rs = new IEC16022Sharp.ReedSol();
-            rs.rs_init_gf(0x12d);
-            rs.rs_init_code(5, 1);
-            rs.rs_encode(3, inData, out  outData);
+            rs.RsInitGf(0x12d);
+            rs.RsInitCode(5, 1);
+            rs.RsEncode(3, inData, out  outData);
 
             // Output
             for (int i = outData.Length - 1; i >= 0; i--)

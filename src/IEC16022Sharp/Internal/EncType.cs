@@ -29,12 +29,6 @@
  *
  */
 
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-
 namespace IEC16022Sharp
 {
     internal enum EncType

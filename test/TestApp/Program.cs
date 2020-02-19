@@ -56,7 +56,7 @@ namespace TestApp
             string outFileName = "simple.png";
             DataMatrix dm = new DataMatrix("Sabry and Ely");
             dm.Image.Save(outFileName, ImageFormat.Png);
-            Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.W, dm.H);
+            Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.Width, dm.Height);
         }
 
 
@@ -65,7 +65,7 @@ namespace TestApp
             string outFileName = "resize.png";
             DataMatrix dm = new DataMatrix("Sabry and Ely");
             DMImgUtility.SimpleResizeBmp(dm.Image, 10, 50).Save(outFileName, ImageFormat.Png);
-            Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.W, dm.H);
+            Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.Width, dm.Height);
         }
 
 
@@ -76,7 +76,7 @@ namespace TestApp
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
                 "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua");
             DMImgUtility.SimpleResizeBmp(dm.Image, 10, 50).Save(outFileName, ImageFormat.Png);
-            Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.W, dm.H);
+            Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.Width, dm.Height);
         }
 
 
