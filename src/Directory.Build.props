@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileDirectory)..\Directory.Build.props</MSBuildAllProjects>
+    <BuildProjectCategory>src</BuildProjectCategory>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)..\Directory.Build.props" />
+
+  <PropertyGroup>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <TargetFrameworks>$(TargetFrameworks);netstandard2.0;net40;net45;net461</TargetFrameworks>
+  </PropertyGroup>
+
+</Project>

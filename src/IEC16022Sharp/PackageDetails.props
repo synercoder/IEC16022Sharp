@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageVersion>0.3.6</PackageVersion>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionPrefix Condition="'$(packageversion)' != ''">$(PackageVersion)</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+    <PackageTags>IEC16022 Datamatrix 2d-barcode</PackageTags>
+    <Product>IEC16022</Product>
+    <Title>IEC16022</Title>
+    <Description>IEC16022</Description>
+    <PackageReleaseNotes></PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <!-- Default settings that are used by other settings -->
+  <PropertyGroup>
+    <BaseArtifactsPath>$(MSBuildThisFileDirectory)artifacts/</BaseArtifactsPath>
+    <BaseArtifactsPathSuffix>$(BuildProjectCategory)/$(MSBuildProjectName)</BaseArtifactsPathSuffix>
+  </PropertyGroup>
+
+  <!-- Default settings that explicitly differ from the Sdk.props defaults  -->
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseIntermediateOutputPath>$(BaseArtifactsPath)obj/$(BaseArtifactsPathSuffix)/</BaseIntermediateOutputPath>
+    <DebugType>portable</DebugType>
+    <DebugType Condition="'$(codecov)' != ''">full</DebugType>
+    <Nullable>disable</Nullable>
+    <SignAssembly>false</SignAssembly>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- Default settings that explicitly differ from the Sdk.targets defaults-->
+  <PropertyGroup>
+    <Company>Synercoding</Company>
+    <Authors>Synercoding</Authors>
+    <BaseOutputPath>$(BaseArtifactsPath)bin/$(BaseArtifactsPathSuffix)/</BaseOutputPath>
+    <PackageOutputPath>$(BaseArtifactsPath)pkg/$(BaseArtifactsPathSuffix)/$(Configuration)/</PackageOutputPath>
+  </PropertyGroup>
+
+  <!-- Default settings that are otherwise undefined -->
+  <PropertyGroup>
+    <Copyright>Copyright © $(Company) $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+    <OverwriteReadOnlyFiles>true</OverwriteReadOnlyFiles>
+    <RepositoryType>git</RepositoryType>
+    <RestoreSources>
+      https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json;
+      https://api.nuget.org/v3/index.json;
+    </RestoreSources>
+    <UseSharedCompilation>true</UseSharedCompilation>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+</Project>

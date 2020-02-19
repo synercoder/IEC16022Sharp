@@ -8,12 +8,22 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "test\TestApp\TestApp.csproj", "{3CCA9E52-713D-4FBA-85C9-CBECC50253D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A3D30A54-8B1A-409D-A81C-2790AE536BF3}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+		src\Directory.Build.targets = src\Directory.Build.targets
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D2902A9D-83C2-4E8A-BBD3-4DE960F1787B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{A8E72AAD-24FA-4053-AA20-95893D4A4E3C}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 		History.txt = History.txt
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Global

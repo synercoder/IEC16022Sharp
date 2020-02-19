@@ -1,8 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45;net461</TargetFrameworks>
-  </PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <Import Project="$(MSBuildThisFileDirectory)\PackageDetails.props" />
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <DefineConstants>DEBUG;$(DefineConstants)</DefineConstants>
@@ -15,10 +13,15 @@
     <AssemblyVersion>0.3.6.0</AssemblyVersion>
     <FileVersion>0.3.6.0</FileVersion>
     <RepositoryUrl>http://sourceforge.net/projects/iec16022sharp/</RepositoryUrl>
+    <NoWarn>CS1570;CS1587;CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework) == 'netstandard2.0' ">
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
   
 </Project>
