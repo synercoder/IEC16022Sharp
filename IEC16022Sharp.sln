@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D2902A9D-83C2-4E8A-BBD3-4DE960F1787B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{A8E72AAD-24FA-4053-AA20-95893D4A4E3C}"
+	ProjectSection(SolutionItems) = preProject
+		History.txt = History.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
