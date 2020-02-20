@@ -107,7 +107,7 @@ namespace IEC16022Sharp
 
                     for (int r = 0; r < rows; r++)
                         for (int c = 0; c < cols; c++)
-                            newDotMatrix[rows - r - 1, c] = _byteArray[c, r] == 0 ? (byte)1 : (byte)0;
+                            newDotMatrix[rows - r - 1, c] = _byteArray[c, r];
 
                     _bmpBW = new FastBWBmp(newDotMatrix);
                 }

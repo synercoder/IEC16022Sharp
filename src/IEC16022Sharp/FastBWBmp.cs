@@ -155,8 +155,8 @@ namespace IEC16022Sharp
             {
                 outStream.Write(fileHeaderBytes, 0, fileHeaderBytes.Length);
                 outStream.Write(infoHeaderBytes, 0, infoHeaderBytes.Length);
-                outStream.Write(blackBytes, 0, blackBytes.Length);
                 outStream.Write(whiteBytes, 0, whiteBytes.Length);
+                outStream.Write(blackBytes, 0, blackBytes.Length);
                 outStream.Write(_pixelData, 0, _pixelData.Length);
                 return outStream.ToArray();
             }
