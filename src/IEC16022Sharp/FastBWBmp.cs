@@ -25,7 +25,6 @@
 
 // Many informations about BMP format from http://www.fortunecity.com/skyscraper/windows/364/bmpffrmt.html
 
-using System;
 using System.IO;
 
 namespace IEC16022Sharp
