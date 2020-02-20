@@ -41,7 +41,7 @@ namespace TestApp
         {
             string outFileName = "simple.png";
             var dm = new DataMatrix("Sabry and Ely");
-            dm.Image.Save(outFileName, ImageFormat.Png);
+            dm.GetBitmap().Save(outFileName, ImageFormat.Png);
             Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.Width, dm.Height);
         }
 
@@ -49,7 +49,7 @@ namespace TestApp
         {
             string outFileName = "resize.png";
             var dm = new DataMatrix("Sabry and Ely");
-            DMImgUtility.SimpleResizeBmp(dm.Image, 10, 50).Save(outFileName, ImageFormat.Png);
+            DMImgUtility.SimpleResizeBmp(dm.GetBitmap(), 10, 50).Save(outFileName, ImageFormat.Png);
             Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.Width, dm.Height);
         }
 
@@ -59,7 +59,7 @@ namespace TestApp
             var dm = new DataMatrix(
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
                 "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua");
-            DMImgUtility.SimpleResizeBmp(dm.Image, 10, 50).Save(outFileName, ImageFormat.Png);
+            DMImgUtility.SimpleResizeBmp(dm.GetBitmap(), 10, 50).Save(outFileName, ImageFormat.Png);
             Console.WriteLine("DataMatrix: {0} W:{1} H:{2} ", outFileName, dm.Width, dm.Height);
         }
 
@@ -78,7 +78,7 @@ namespace TestApp
                     case 2: dm = new DataMatrix("This is a test - IEC16022Sharp", 22, 22, EncodingType.Ascii); break;
                 }
                 using (var ms = new MemoryStream())
-                    dm.Image.Save(ms, ImageFormat.Bmp);
+                    dm.GetBitmap().Save(ms, ImageFormat.Bmp);
             }
             double elapsedTime = DateTime.Now.Subtract(tstart).TotalSeconds;
             Console.WriteLine("SpeedTest mode [{0}] : {1} matrix - {2} matrix/sec", mode, matrixNum, ( matrixNum / elapsedTime ).ToString(".00"));

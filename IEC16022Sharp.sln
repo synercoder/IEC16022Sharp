@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IEC16022Sharp", "src\IEC16022Sharp\IEC16022Sharp.csproj", "{369DA257-17E1-4D9A-BCDA-0CE726C35B36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "test\TestApp\TestApp.csproj", "{3CCA9E52-713D-4FBA-85C9-CBECC50253D2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A3D30A54-8B1A-409D-A81C-2790AE536BF3}"
 	ProjectSection(SolutionItems) = preProject
 		src\Directory.Build.props = src\Directory.Build.props
@@ -14,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A3D30A54-8B1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D2902A9D-83C2-4E8A-BBD3-4DE960F1787B}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.props = test\Directory.Build.props
+		test\Directory.Build.targets = test\Directory.Build.targets
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{A8E72AAD-24FA-4053-AA20-95893D4A4E3C}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,7 +28,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{A8E72AAD-2
 		LICENSE = LICENSE
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEC16022Sharp.Tests", "test\IEC16022Sharp.Tests\IEC16022Sharp.Tests.csproj", "{A18A6FA2-46E4-4B3A-8F7F-A68AC1C57795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IEC16022Sharp.Tests", "test\IEC16022Sharp.Tests\IEC16022Sharp.Tests.csproj", "{A18A6FA2-46E4-4B3A-8F7F-A68AC1C57795}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IEC16022Sharp.Drawing", "src\IEC16022Sharp.Drawing\IEC16022Sharp.Drawing.csproj", "{29176324-A667-46D8-8291-0B72A7F13BA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{A6F1CA78-14D7-4F70-A798-8705AD042673}"
+	ProjectSection(SolutionItems) = preProject
+		samples\Directory.Build.props = samples\Directory.Build.props
+		samples\Directory.Build.targets = samples\Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "samples\TestApp\TestApp.csproj", "{B4F75EA8-D12B-43F9-ACF7-B9820E02326C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,24 +50,30 @@ Global
 		{369DA257-17E1-4D9A-BCDA-0CE726C35B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{369DA257-17E1-4D9A-BCDA-0CE726C35B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{369DA257-17E1-4D9A-BCDA-0CE726C35B36}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CCA9E52-713D-4FBA-85C9-CBECC50253D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CCA9E52-713D-4FBA-85C9-CBECC50253D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CCA9E52-713D-4FBA-85C9-CBECC50253D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CCA9E52-713D-4FBA-85C9-CBECC50253D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A18A6FA2-46E4-4B3A-8F7F-A68AC1C57795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A18A6FA2-46E4-4B3A-8F7F-A68AC1C57795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A18A6FA2-46E4-4B3A-8F7F-A68AC1C57795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A18A6FA2-46E4-4B3A-8F7F-A68AC1C57795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29176324-A667-46D8-8291-0B72A7F13BA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29176324-A667-46D8-8291-0B72A7F13BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29176324-A667-46D8-8291-0B72A7F13BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29176324-A667-46D8-8291-0B72A7F13BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4F75EA8-D12B-43F9-ACF7-B9820E02326C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4F75EA8-D12B-43F9-ACF7-B9820E02326C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4F75EA8-D12B-43F9-ACF7-B9820E02326C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4F75EA8-D12B-43F9-ACF7-B9820E02326C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{369DA257-17E1-4D9A-BCDA-0CE726C35B36} = {A3D30A54-8B1A-409D-A81C-2790AE536BF3}
-		{3CCA9E52-713D-4FBA-85C9-CBECC50253D2} = {D2902A9D-83C2-4E8A-BBD3-4DE960F1787B}
 		{A3D30A54-8B1A-409D-A81C-2790AE536BF3} = {A8E72AAD-24FA-4053-AA20-95893D4A4E3C}
 		{D2902A9D-83C2-4E8A-BBD3-4DE960F1787B} = {A8E72AAD-24FA-4053-AA20-95893D4A4E3C}
 		{A18A6FA2-46E4-4B3A-8F7F-A68AC1C57795} = {D2902A9D-83C2-4E8A-BBD3-4DE960F1787B}
+		{29176324-A667-46D8-8291-0B72A7F13BA0} = {A3D30A54-8B1A-409D-A81C-2790AE536BF3}
+		{A6F1CA78-14D7-4F70-A798-8705AD042673} = {A8E72AAD-24FA-4053-AA20-95893D4A4E3C}
+		{B4F75EA8-D12B-43F9-ACF7-B9820E02326C} = {A6F1CA78-14D7-4F70-A798-8705AD042673}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {268B923A-45BA-4525-B75D-31D8B39AD9B7}

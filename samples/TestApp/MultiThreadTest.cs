@@ -36,7 +36,7 @@ namespace TestApp
                 var dm1 = new DataMatrix(
                     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, " +
                     "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua");
-                _ = dm1.Image;
+                _ = dm1.GetBitmap();
             }
             Console.WriteLine(Thread.CurrentThread.Name + " end");
         }

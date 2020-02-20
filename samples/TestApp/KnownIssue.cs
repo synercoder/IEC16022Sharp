@@ -16,7 +16,7 @@ namespace TestApp
             };
 
             for (int i = 0; i < dm.Length; i++)
-                DMImgUtility.SimpleResizeBmp(dm[i].Image, 10, 100).Save("KnownIssue_" + i + ".png", ImageFormat.Png);
+                DMImgUtility.SimpleResizeBmp(dm[i].GetBitmap(), 10, 100).Save("KnownIssue_" + i + ".png", ImageFormat.Png);
         }
     }
 }

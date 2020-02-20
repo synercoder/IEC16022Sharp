@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net45</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\IEC16022Sharp.Drawing\IEC16022Sharp.Drawing.csproj" />
+    <ProjectReference Include="..\..\src\IEC16022Sharp\IEC16022Sharp.csproj" />
+  </ItemGroup>
+
+</Project>
