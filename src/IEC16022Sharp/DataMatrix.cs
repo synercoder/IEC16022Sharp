@@ -1,34 +1,5 @@
-/*
- *
- * IEC16022Sharp DataMatrix bar code generation lib
- * (c) 2007-2008 Fabrizio Accatino <fhtino@yahoo.com>
- * 
- *   HexPbm output by Andrew Francis <acfrancis@gmail.com>
- * 
- *   Core components are based on IEC16022 by Adrian Kennard, Andrews & Arnold Ltd
- *   (C version currently maintained by Stefan Schmidt)
- * (c) 2020 Gerard Gunnewijk <gerard.gunnewijk@live.nl>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
- *
- */
-
 using System;
 using System.Text;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace IEC16022Sharp
 {
@@ -38,8 +9,6 @@ namespace IEC16022Sharp
         private readonly EncodingType _globalEncoding = EncodingType.NotDef;
         private int _width;
         private int _height;
-        private byte[,] _byteArray = null;
-        private Bitmap _bmp = null;
         private FastBWBmp _bmpBW = null;
         private byte[] _encoding = null;
         private string _hexPbm = null;
@@ -77,7 +46,7 @@ namespace IEC16022Sharp
 
             try
             {
-                _build();
+                PixelArray = _build();
             }
             catch (DataMatrixException)
             {
@@ -87,9 +56,6 @@ namespace IEC16022Sharp
             {
                 throw new DataMatrixException("Internal error", ex);
             }
-
-            if (_byteArray == null)
-                throw new DataMatrixException("Error creating DataMatrix");
         }
 
         /// <summary>
@@ -101,30 +67,17 @@ namespace IEC16022Sharp
             {
                 if (_bmpBW == null)
                 {
-                    int rows = _byteArray.GetLength(1);
-                    int cols = _byteArray.GetLength(0);
-                    byte[,] newDotMatrix = new byte[rows, cols];
+                    int rows = PixelArray.GetLength(1);
+                    int cols = PixelArray.GetLength(0);
+                    var newDotMatrix = new BarColor[rows, cols];
 
                     for (int r = 0; r < rows; r++)
                         for (int c = 0; c < cols; c++)
-                            newDotMatrix[rows - r - 1, c] = _byteArray[c, r];
+                            newDotMatrix[rows - r - 1, c] = PixelArray[c, r];
 
                     _bmpBW = new FastBWBmp(newDotMatrix);
                 }
                 return _bmpBW;
-            }
-        }
-
-        /// <summary>
-        /// Get an Image (.NET) of the datamatrix
-        /// </summary>
-        public Bitmap Image
-        {
-            get
-            {
-                if (_bmp == null)
-                    _buildBitmap();
-                return _bmp;
             }
         }
 
@@ -137,8 +90,8 @@ namespace IEC16022Sharp
             {
                 if (_hexPbm == null)
                 {
-                    int rows = _byteArray.GetLength(1);
-                    int cols = _byteArray.GetLength(0);
+                    int rows = PixelArray.GetLength(1);
+                    int cols = PixelArray.GetLength(0);
 
                     int bitCount = 7;
                     int hexDigitCount = 0;
@@ -148,7 +101,7 @@ namespace IEC16022Sharp
                     for (int r = rows - 1; r >= 0; r--)
                         for (int c = 0; c < cols; c++)
                         {
-                            byte currentBit = (byte)( _byteArray[c, r] << bitCount );
+                            byte currentBit = (byte)( ((byte)PixelArray[c, r]) << bitCount );
                             currentByte |= currentBit;
                             if (bitCount == 0)
                             {
@@ -183,11 +136,11 @@ namespace IEC16022Sharp
         /// <summary>
         /// Get a copy of the pixel matrix
         /// </summary>
-        public byte[,] PixelArray { get { return (byte[,])_byteArray.Clone(); } }
+        public Immutable2DArray<BarColor> PixelArray { get; }
         public int Width { get { return _width; } }
         public int Height { get { return _height; } }
 
-        private void _build()
+        private Immutable2DArray<BarColor> _build()
         {
             //byte[] encoding = null;
             int lenp = 0;
@@ -219,52 +172,14 @@ namespace IEC16022Sharp
             if (array == null)
                 throw new DataMatrixException("Error building datamatrix: " + iec16022.ErrorMessage);
 
-            _byteArray = new byte[_width, _height];
+            var resultArray = new BarColor[_width, _height];
             for (int x = 0; x < _width; x++)
                 for (int y = 0; y < _height; y++)
-                    _byteArray[x, y] = array[(_width * y) + x];
-        }
+                    resultArray[x, y] = array[(_width * y) + x] == 0
+                        ? BarColor.Black
+                        : BarColor.White;
 
-        private void _buildBitmap()
-        {
-            // Nota: questo codice lavora solo sulle immagini 24bit
-
-            int W = _byteArray.GetLength(0);
-            int H = _byteArray.GetLength(1);
-            var bmp = new Bitmap(W, H, PixelFormat.Format24bppRgb);
-            var bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
-            var ptr = bmpData.Scan0;
-
-            //int bytes = bmp.Width * bmp.Height * 3;   // BUG: la larghezza è data dallo Stride e non da bmpWidth
-            int bytes = bmpData.Stride * bmp.Height;
-            byte[] rgbValues = new byte[bytes];
-
-            for (int x = 0; x < W; x++)
-            {
-                for (int y = 0; y < H; y++)
-                {
-                    int idx = ( ( H - y - 1 ) * bmpData.Stride ) + (x * 3);
-
-                    if (_byteArray[x, y] == 0)
-                    {
-                        rgbValues[idx] = 255;
-                        rgbValues[idx + 1] = 255;
-                        rgbValues[idx + 2] = 255;
-                    }
-                    else
-                    {
-                        rgbValues[idx] = 0;
-                        rgbValues[idx + 1] = 0;
-                        rgbValues[idx + 2] = 0;
-                    }
-                }
-            }
-
-            // Copy the RGB values back to the bitmap
-            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, bytes);
-            bmp.UnlockBits(bmpData);
-
-            _bmp = bmp;
+            return new Immutable2DArray<BarColor>(resultArray);
         }
 
         /// <summary>

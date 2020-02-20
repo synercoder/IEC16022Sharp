@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="$(MSBuildThisFileDirectory)\PackageDetails.props" />
+
+  <PropertyGroup>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" $(TargetFramework) == 'netstandard2.0' ">
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IEC16022Sharp\IEC16022Sharp.csproj" />
+  </ItemGroup>
+
+</Project>

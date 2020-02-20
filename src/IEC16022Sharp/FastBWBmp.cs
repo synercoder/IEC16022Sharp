@@ -33,11 +33,11 @@ namespace IEC16022Sharp
     {
         private readonly int _width;
         private readonly int _height;
-        private readonly byte[,] _dots;
+        private readonly BarColor[,] _dots;
         private readonly byte[] _pixelData;
         private readonly byte[] _fileBytes;
 
-        public FastBWBmp(byte[,] dots)
+        public FastBWBmp(BarColor[,] dots)
         {
             _width = dots.GetLength(1);
             _height = dots.GetLength(0);
@@ -80,10 +80,10 @@ namespace IEC16022Sharp
             int cols = _dots.GetLength(1);
 
             // intero superiore
-            int bytesPerRow = (cols / 8) + ( cols % 8 == 0 ? 0 : 1 );
+            int bytesPerRow = ( cols / 8 ) + ( cols % 8 == 0 ? 0 : 1 );
             // arrotonda sempre a multipli di 4 bytes
             if (bytesPerRow % 4 > 0)
-                bytesPerRow += 4 - (bytesPerRow % 4);
+                bytesPerRow += 4 - ( bytesPerRow % 4 );
 
             // Alloca spazio per i pixel
             byte[] bytes = new byte[bytesPerRow * rows];
@@ -112,10 +112,10 @@ namespace IEC16022Sharp
                 for (int c = 0; c < cols; c++)
                 {
                     // Attenzione: le righe dell'immagine sono memorizzate nell'ordine inverso sul file Bmp
-                    bytes[(( rows - r - 1 ) * bytesPerRow) + (c / 8)] = (byte)
+                    bytes[( ( rows - r - 1 ) * bytesPerRow ) + ( c / 8 )] = (byte)
                          (
-                             bytes[(( rows - r - 1 ) * bytesPerRow) + (c / 8)] |
-                             ( ( _dots[r, c] & 1 ) << ( 7 - (c % 8) ) )
+                             bytes[( ( rows - r - 1 ) * bytesPerRow ) + ( c / 8 )] |
+                             ( ( ( (byte)_dots[r, c] ) & 1 ) << ( 7 - ( c % 8 ) ) )
                          );
                 }
             }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageVersion>1.0.0-alpha</PackageVersion>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionPrefix Condition="'$(packageversion)' != ''">$(PackageVersion)</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+    <PackageTags>IEC16022 Datamatrix 2d-barcode System.Drawing</PackageTags>
+    <Product>IEC16022.Drawing</Product>
+    <Title>IEC16022.Drawing</Title>
+    <Description>Enables System.Drawing.Bitmap generation for IEC16022Sharp datamatrix.</Description>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIcon>Logo.png</PackageIcon>
+    <Copyright>Copyright © $(Product) $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\shared\Logo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
