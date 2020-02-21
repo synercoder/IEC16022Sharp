@@ -40,27 +40,16 @@ namespace IEC16022Sharp
 {
     public class ReedSol
     {
-        private int _logmod;	    // 2**symsize - 1
-        private int _rlen;
+        private readonly int _logmod;	    // 2**symsize - 1
+        private readonly int _rlen;
 
-        private int[] _log = null;
-        private int[] _alog = null;
-        private int[] _rspoly = null;
+        private readonly int[] _log;
+        private readonly int[] _alog;
+        private readonly int[] _rspoly;
 
-        public void RsInitGf(int poly)
+        public ReedSol(int poly, int nsym, int index)
         {
             int m, b, p, v;
-
-            // C# does not need that:
-            //
-            // Return storage from previous setup
-            //if (log)
-            //{
-            //    free(log);
-            //    free(alog);
-            //    free(rspoly);
-            //    rspoly = NULL;
-            //}
 
             // Find the top bit, and hence the symbol size
             for (b = 1, m = 0; b <= poly; b <<= 1)
@@ -81,17 +70,10 @@ namespace IEC16022Sharp
                 if (( p & b ) != 0)
                     p ^= poly;
             }
-        }
 
-        public void RsInitCode(int nsym, int index)
-        {
             int i, k;
 
-            // C# does not need that:
-            //if (rspoly)
-            //    free(rspoly);
-
-            _rspoly = new int[nsym + 1];   // C:  rspoly = (int*)malloc(sizeof(int) * (nsym + 1));
+            _rspoly = new int[nsym + 1];
 
             _rlen = nsym;
 

@@ -377,12 +377,9 @@ namespace IEC16022Sharp
 
         private void _ecc200(byte[] binary, int bytes, int datablock, int rsblock)
         {
-            var rsObj = new ReedSol();
-
             int blocks = ( bytes + 2 ) / datablock, b;
 
-            rsObj.RsInitGf(0x12d);
-            rsObj.RsInitCode(rsblock, 1);
+            var rsObj = new ReedSol(0x12d, rsblock, 1);
             for (b = 0; b < blocks; b++)
             {
                 byte[] buf = new byte[256];

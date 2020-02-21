@@ -12,11 +12,7 @@ namespace IEC16022Sharp.Tests
             // Arrange 
             byte[] inData = new byte[] { 142, 164, 186 };
             byte[] okData = new byte[] { 102, 88, 5, 25, 114 };
-            var rs = new ReedSol();
-
-            // Act
-            rs.RsInitGf(0x12d);
-            rs.RsInitCode(5, 1);
+            var rs = new ReedSol(0x12d, 5, 1);
             rs.RsEncode(3, inData, out byte[] outData);
 
             // Assert
