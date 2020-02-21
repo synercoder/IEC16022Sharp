@@ -942,83 +942,38 @@ namespace IEC16022Sharp
                 enc[p, (int)EncType.E_BINARY].S = (short)1;
                 if (bl != 0 && b == (int)EncType.E_BINARY)
                     enc[p, b].S += enc[p + 1, b].S;
-                /*
-                 * fprintf (stderr, "%d:", p); for (e = 0; e < E_MAX; e++) fprintf \
-                 * (stderr, " %c*%d/%d", encchr[e], enc[p][e].s, enc[p][e].t); \
-                 * fprintf (stderr, "\n");
-                 */
             }
 
-            //char* encoding ;
-            //encoding = safemalloc(l + 1);
-
-            if (true)
+            // VECCHIA
+            byte[] encoding = new byte[l + 1];
+            p = 0;
             {
-                // VECCHIA
-                byte[] encoding = new byte[l + 1];
-                p = 0;
+                char cur = (char)EncType.E_ASCII;	// starts ASCII
+                while (p < l)
                 {
-                    char cur = (char)EncType.E_ASCII;	// starts ASCII
-                    while (p < l)
-                    {
-                        int t = 0;
-                        int m = 0;
-                        char b = (char)0;
-                        for (e = (char)0; e < (int)EncType.E_MAX; e++)
-                            if (enc[p, e].T != 0
-                                && ( ( t = enc[p, e].T + _switchcost[cur, e] ) <
-                                m || ( t == m && e == cur ) || !( m != 0 ) ))
-                            {
-                                b = e;
-                                m = t;
-                            }
-                        cur = b;
-                        m = enc[p, b].S;
+                    int t = 0;
+                    int m = 0;
+                    char b = (char)0;
+                    for (e = (char)0; e < (int)EncType.E_MAX; e++)
+                        if (enc[p, e].T != 0
+                            && ( ( t = enc[p, e].T + _switchcost[cur, e] ) <
+                            m || ( t == m && e == cur ) || !( m != 0 ) ))
+                        {
+                            b = e;
+                            m = t;
+                        }
+                    cur = b;
+                    m = enc[p, b].S;
 
-                        if (!( p != 0 ) && lenp != 0)
-                            lenp = enc[p, b].T;
+                    if (!( p != 0 ) && lenp != 0)
+                        lenp = enc[p, b].T;
 
-                        while (p < l && m-- != 0)
-                            encoding[p++] = (byte)_encchr[b];
-                    }
+                    while (p < l && m-- != 0)
+                        encoding[p++] = (byte)_encchr[b];
                 }
-                encoding[p] = 0;
-                return encoding;
-
             }
-            else
-            {
-                //// NUOVA
-                //byte[] encoding = new byte[l];
-                //p = 0;
-                //{
-                //    char cur = (char)EncType.E_ASCII;	// starts ASCII
-                //    while (p < l)
-                //    {
-                //        int t = 0;
-                //        int m = 0;
-                //        char b = (char)0;
-                //        for (e = (char)0; e < (int)EncType.E_MAX; e++)
-                //            if (enc[p, e].t != 0
-                //                && ((t = enc[p, e].t + switchcost[cur, e]) <
-                //                m || t == m && e == cur || !(m != 0)))
-                //            {
-                //                b = e;
-                //                m = t;
-                //            }
-                //        cur = b;
-                //        m = enc[p, b].s;
-
-                //        if (!(p != 0) && lenp != 0)
-                //            lenp = enc[p, b].t;
-
-                //        while (p < l && (m--) != 0)
-                //            encoding[p++] = (byte)encchr[b];
-                //    }
-                //}
-                ////encoding[p] = 0;
-                //return encoding;
-            }
+            encoding[p] = 0;
+            return encoding;
         }
 
         private struct TempStruct1
