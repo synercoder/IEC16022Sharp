@@ -163,7 +163,6 @@ namespace IEC16022Sharp
                        ref _width,
                        ref _height,
                        ref _encoding,
-                       _data.Length,
                        _data,
                        ref lenp,
                        ref maxp,
