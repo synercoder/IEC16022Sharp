@@ -80,8 +80,11 @@ namespace IEC16022Sharp
 
         public string ErrorMessage { get; private set; } = null;
 
-        public byte[] Iec16022ecc200(ref int wptr, ref int hptr, ref byte[] encodingptr, int barcodelen, byte[] barcode, ref int lenp, ref int maxp, ref int eccp)
+        public byte[] Iec16022ecc200(ref int wptr, ref int hptr, ref byte[] encodingptr, byte[] barcode, ref int lenp, ref int maxp, ref int eccp)
         {
+            if (barcode.Length == 0 || barcode.Length > MAXBARCODE)
+                throw new System.ArgumentOutOfRangeException(nameof(barcode), $"Barcode data must be a valid length, bigger than zero and lower than {MAXBARCODE}");
+
             byte[] binary = new byte[3000];	// encoded raw data and ecc to place in barcode
             int W = 0, H = 0;
             byte[] encoding = null;
@@ -114,11 +117,11 @@ namespace IEC16022Sharp
                 if (encoding == null)
                 {
                     int len = 0;
-                    byte[] e = _encmake(barcodelen, barcode, ref len, (char)1);
+                    byte[] e = _encmake(barcode, ref len, (char)1);
                     if (e != null && len != _ecc200matrix[matrix_IDX].Bytes)
                     {
                         // try not an exact fit
-                        e = _encmake(barcodelen, barcode, ref len, (char)0);
+                        e = _encmake(barcode, ref len, (char)0);
                         if (len > _ecc200matrix[matrix_IDX].Bytes)
                         {
                             ErrorMessage = "Cannot make barcode fit " + W + "x" + H;
@@ -133,7 +136,7 @@ namespace IEC16022Sharp
                 // find a suitable encoding
                 int dummyint = 0;
                 if (encoding == null)
-                    encoding = _encmake(barcodelen, barcode, ref dummyint, (char)1);
+                    encoding = _encmake(barcode, ref dummyint, (char)1);
 
                 if (encoding != null)
                 {
@@ -142,7 +145,7 @@ namespace IEC16022Sharp
                     for (; _ecc200matrix[matrix_IDX].W != 0; matrix_IDX++)
                     {
                         int dummyInt2 = 0;
-                        char rv = _ecc200encode(binary, _ecc200matrix[matrix_IDX].Bytes, barcode, barcodelen, encoding, ref dummyInt2);
+                        char rv = _ecc200encode(binary, _ecc200matrix[matrix_IDX].Bytes, barcode, encoding, ref dummyInt2);
                         if (!( rv == (char)0 ))
                         {
                             break;
@@ -153,12 +156,12 @@ namespace IEC16022Sharp
                 {
                     int len = 0;
                     byte[] e;
-                    e = _encmake(barcodelen, barcode, ref len, (char)1);
+                    e = _encmake(barcode, ref len, (char)1);
                     for (matrix_IDX = 0; _ecc200matrix[matrix_IDX].W != 0 && _ecc200matrix[matrix_IDX].Bytes != len; matrix_IDX++) ;
                     if (e != null && !( _ecc200matrix[matrix_IDX].W != 0 ))
                     {
                         // try for non exact fit
-                        e = _encmake(barcodelen, barcode, ref len, (char)0);
+                        e = _encmake(barcode, ref len, (char)0);
                         for (matrix_IDX = 0; _ecc200matrix[matrix_IDX].W != 0 && _ecc200matrix[matrix_IDX].Bytes < len; matrix_IDX++) ;
                     }
                     encoding = e;
@@ -172,7 +175,7 @@ namespace IEC16022Sharp
                 H = _ecc200matrix[matrix_IDX].H;
             }
 
-            if (!( _ecc200encode(binary, _ecc200matrix[matrix_IDX].Bytes, barcode, barcodelen, encoding, ref lenp) != 0 ))
+            if (!( _ecc200encode(binary, _ecc200matrix[matrix_IDX].Bytes, barcode, encoding, ref lenp) != 0 ))
             {
                 ErrorMessage = "Barcode too long for " + W + "x" + H;
                 return null;
@@ -394,10 +397,11 @@ namespace IEC16022Sharp
             }
         }
 
-        private char _ecc200encode(byte[] t, int tl, byte[] s, int sl, byte[] encoding, ref int lenp)
+        private char _ecc200encode(byte[] t, int tl, byte[] s, byte[] encoding, ref int lenp)
         {
             char enc = 'a';		// start in ASCII encoding mode
             int tp = 0, sp = 0;
+            int sl = s.Length;
             if (encoding.Length < sl)
             {
                 ErrorMessage = "Encoding string too short";
@@ -649,8 +653,9 @@ namespace IEC16022Sharp
             return (char)1;		// OK 
         }
 
-        private byte[] _encmake(int l, byte[] s, ref int lenp, char exact)
+        private byte[] _encmake(byte[] s, ref int lenp, char exact)
         {
+            int l = s.Length;
             int p = l;
             char e;
 
@@ -658,13 +663,7 @@ namespace IEC16022Sharp
 
             //memset(&enc, 0, sizeof(enc));
 
-            if (!( l != 0 ))
-                return null;	// no length
-
-            if (l > MAXBARCODE)
-                return null;	// not valid
-
-            while ( p--  > 0)
+            while (p-- > 0)
             {
                 char b = (char)0;
                 char sub;
