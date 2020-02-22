@@ -31,10 +31,61 @@ namespace TestApp
             // A known issue
             KnownIssue.Exec();
 
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.WriteLine("                                ");
+            Console.WriteLine("                                ");
+
+            _drawDataMatrixToConsole(new DataMatrix("Test"));
+
             Console.WriteLine("***END***");
             Console.WriteLine("\n\nElapsed time: " + DateTime.Now.Subtract(tstart).TotalSeconds);
             Console.WriteLine("\n\nPress a key to exit");
-            Console.ReadKey();
+            Console.ReadLine();
+        }
+
+        private static void _drawDataMatrixToConsole(DataMatrix dm)
+        {
+            var newDotMatrix = ShiftArrayContents(dm.PixelArray);
+
+            for (int x = 0; x < newDotMatrix.GetLength(0); x++)
+            {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.Write("  ");
+                Console.Write("  ");
+                Console.ResetColor();
+                for (int y = 0; y < newDotMatrix.GetLength(1); y++)
+                {
+                    Console.BackgroundColor = newDotMatrix[x, y] == BarColor.Black
+                        ? ConsoleColor.Black
+                        : ConsoleColor.White;
+                    Console.Write("  ");
+                }
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.Write("  ");
+                Console.Write("  ");
+                Console.WriteLine();
+                Console.ResetColor();
+            }
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.WriteLine("                                ");
+            Console.WriteLine("                                ");
+            Console.WriteLine();
+            Console.ResetColor();
+
+            BarColor[,] ShiftArrayContents(Immutable2DArray<BarColor> input)
+            {
+                int rows = dm.PixelArray.GetLength(1);
+                int cols = dm.PixelArray.GetLength(0);
+                var output = new BarColor[rows, cols];
+                for (int r = 0; r < rows; r++)
+                    for (int c = 0; c < cols; c++)
+                        output[rows - r - 1, c] = dm.PixelArray[c, r];
+
+                return output;
+            }
         }
 
         private static void _simpleDataMatrix()

@@ -33,7 +33,7 @@ namespace IEC16022Sharp
                 {
                     int idx = ( ( height - y - 1 ) * bmpData.Stride ) + ( x * 3 );
 
-                    if (dataMatrix.PixelArray[x, y] == 0)
+                    if (dataMatrix.PixelArray[x, y] == BarColor.White)
                     {
                         rgbValues[idx] = 255;
                         rgbValues[idx + 1] = 255;

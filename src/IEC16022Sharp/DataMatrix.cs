@@ -174,7 +174,7 @@ namespace IEC16022Sharp
             var resultArray = new BarColor[_width, _height];
             for (int x = 0; x < _width; x++)
                 for (int y = 0; y < _height; y++)
-                    resultArray[x, y] = array[(_width * y) + x] == 0
+                    resultArray[x, y] = array[(_width * y) + x] == 1
                         ? BarColor.Black
                         : BarColor.White;
 
